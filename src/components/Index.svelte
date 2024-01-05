@@ -5,18 +5,27 @@
 
 	let canvasEl;
 	let value;
+	let riveStep;
 
 	onMount(() => {
 		const r = new Rive({
-			src: "https://cdn.rive.app/animations/vehicles.riv",
+			src: "https://ucarecdn.com/d3b7e56c-50a0-4a4a-83a7-b7d26e0b7952/Advancefromnumber.riv",
 			canvas: canvasEl,
 			autoplay: true,
-			stateMachines: "bumpy",
+			stateMachines: "state-machine",
 			onLoad: () => {
-				r.resizeDrawingSurfaceToCanvas();
+				const inputs = r.stateMachineInputs("state-machine");
+				riveStep = inputs.find((i) => i.name === "rive-step");
 			}
 		});
 	});
+
+	$: value, updateRiveStep();
+
+	const updateRiveStep = () => {
+		if (!riveStep || value === undefined) return;
+		riveStep.value = value;
+	};
 </script>
 
 <section id="scrolly">
