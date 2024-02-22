@@ -18,7 +18,7 @@
 		<h1>{copy.hed}</h1>
 		<h3>{copy.dek}</h3>
 		<p>{copy.byline}</p>
-		<p>{copy.byline2}</p>
+		<!-- <p>{copy.byline2}</p> -->
 	</section>
 
 	<section id="intro" use:inView on:enter={onEnter} on:exit={onExit}>

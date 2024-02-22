@@ -7,47 +7,54 @@
 	export let steps;
 
 	let canvasEl;
+	let scrollValue;
 	let riveStep;
-	let scrollyValue;
+	let leftSelect;
+	let rightSelect;
 
-	$: scrollyTop = $fixed ? 653 : 0; // 70vh
+	$: top = $fixed ? 653 : 0; // 70vh - just mobile
+
+	const onClick = [() => leftSelect.fire(), () => rightSelect.fire()];
 
 	onMount(() => {
-		// const r = new Rive({
-		// 	src: "https://ucarecdn.com/f4639c73-2ad7-4b0e-918d-40d6ec439eed/240215_QueuesExperiment",
-		// 	canvas: canvasEl,
-		// 	autoplay: true,
-		// 	stateMachines: "StateMachine",
-		// 	onLoad: () => {
-		// 		const inputs = r.stateMachineInputs("StateMachine");
-		// 		riveStep = inputs.find((i) => i.name === "rive-step");
-		// 		riveStep.value = 1;
-		// 	}
-		// });
+		const r = new Rive({
+			src: "https://ucarecdn.com/f4639c73-2ad7-4b0e-918d-40d6ec439eed/240215_QueuesExperiment",
+			canvas: canvasEl,
+			autoplay: true,
+			stateMachines: "StateMachine",
+			onLoad: () => {
+				const inputs = r.stateMachineInputs("StateMachine");
+				riveStep = inputs.find((i) => i.name === "rive-step");
+				leftSelect = inputs.find((i) => i.name === "Left-select");
+				rightSelect = inputs.find((i) => i.name === "Right-Select");
+				riveStep.value = 1;
+			}
+		});
 	});
 </script>
 
 <div class="scene-wrapper" class:fixed={$fixed}>
 	<div class="canvas">
-		<canvas bind:this={canvasEl}></canvas>
+		<canvas bind:this={canvasEl} height={500}></canvas>
 	</div>
 
 	<div class="text">
-		<Scrolly bind:value={scrollyValue} top={scrollyTop}>
+		<Scrolly bind:value={scrollValue} {top}>
 			{#each steps as { text, prompt, options }, i}
-				{@const active = scrollyValue === i}
+				{@const active = scrollValue === i}
 				<p class="step" class:active>
 					{@html text}
 
 					{#if prompt && options}
 						<p class="prompt">{@html prompt}</p>
-						{#each options as { label, value }}
-							<button>{label}</button>
+						{#each options as { label, value }, i}
+							<button on:click={onClick[i]}>{label}</button>
 						{/each}
 					{/if}
 				</p>
 			{/each}
 		</Scrolly>
+		<div style:height="500px"></div>
 	</div>
 </div>
 
@@ -73,14 +80,15 @@
 		width: 100%;
 	}
 	.step {
-		margin: 5em 0;
+		margin: 8em 0;
 		padding: 1rem;
+		opacity: 0.4;
 	}
 	.step:first-of-type {
 		margin-top: 0;
 	}
 	.step.active {
-		/* background: lightyellow; */
+		opacity: 1;
 	}
 	.prompt {
 		font-weight: bold;
