@@ -3,14 +3,13 @@
 	import copy from "$data/copy.json";
 	import inView from "$actions/inView.js";
 	import viewport from "$stores/viewport.js";
-
-	let fixed = false;
+	import { fixed } from "$stores/misc.js";
 
 	const onEnter = () => {
-		if ($viewport.width < 600) fixed = false;
+		if ($viewport.width < 600) $fixed = false;
 	};
 	const onExit = () => {
-		if ($viewport.width < 600) fixed = true;
+		if ($viewport.width < 600) $fixed = true;
 	};
 </script>
 
@@ -29,7 +28,7 @@
 	</section>
 
 	<section id="scene-1">
-		<Scene {fixed} />
+		<Scene steps={copy.scenes[0].steps} />
 	</section>
 </article>
 

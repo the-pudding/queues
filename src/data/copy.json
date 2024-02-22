@@ -1,1 +1,44 @@
-{"hed":"LineCraft","dek":"How queues work and how to wait better","byline":"By Olumurejiwa Fatunde and Uri Bram","byline2":"With Marisa Rafter and Michelle McGhee","intro":[{"type":"text","value":"Whether it’s getting a latte, checking out at the grocery store, or waiting for an elevator we all experience queues all the time. It can be frustrating to wait in line. We've all been there, mentally redesigning the system, thinking, 'There's got to be a better way to do this.'"},{"type":"text","value":"My work is in the field of queueing theory, the mathematical study of waiting in line. Turns out, there are lots of ways to do it better, and they might not be what you think."},{"type":"text","value":"To show you some of them, let’s go to a familiar setting with a whole lot of queues: the airport."}]}
+{
+	"hed": "LineCraft",
+	"dek": "How queues work and how to wait better",
+	"byline": "By Olumurejiwa Fatunde and Uri Bram",
+	"byline2": "With Marisa Rafter and Michelle McGhee",
+	"intro": [
+		{
+			"type": "text",
+			"value": "Whether it’s getting a latte, checking out at the grocery store, or waiting for an elevator we all experience queues all the time. It can be frustrating to wait in line. We've all been there, mentally redesigning the system, thinking, 'There's got to be a better way to do this.'"
+		},
+		{
+			"type": "text",
+			"value": "My work is in the field of queueing theory, the mathematical study of waiting in line. Turns out, there are lots of ways to do it better, and they might not be what you think."
+		},
+		{
+			"type": "text",
+			"value": "To show you some of them, let’s go to a familiar setting with a whole lot of queues: the airport."
+		}
+	],
+	"scenes": [
+		{
+			"title": "Scene 1",
+			"steps": [
+				{
+					"text": "We’ll begin at the ticket check line, the first queue standing between you and your vacation. 🌴"
+				},
+				{
+					"text": "On your left is a queue with 10 travelers and 1 ticket-checker, on your right is a queue with 30 travelers and 3 ticket-checkers.",
+					"prompt": "Which one do you pick?",
+					"options": [
+						{ "label": "Queue A", "value": "a" },
+						{ "label": "Queue B", "value": "b" }
+					]
+				},
+				{
+					"text": "It’s an interesting problem: if each side has 10 travelers per ticket-checker, shouldn’t the lines move equally fast? Is it just random which line will be quicker, or can you beat the odds? Let’s see what happens."
+				},
+				{
+					"text": "As you can see, you got through in [n] minutes, while it took the other line [m] minutes. Even though they both had the same number of travelers per teller, the side with multiple tellers serving a combined line -- what queuing theorists call a <strong>pooled queue</strong> -- was [p]% faster than the side with one teller per line -- what queuing theorists call a <strong>parallel queue</strong>."
+				}
+			]
+		}
+	]
+}
