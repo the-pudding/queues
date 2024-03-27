@@ -1,48 +1,62 @@
 <script>
 	import Scene from "$components/Scene.svelte";
 	import copy from "$data/copy.json";
-	import inView from "$actions/inView.js";
-	import viewport from "$stores/viewport.js";
-	import { fixed } from "$stores/misc.js";
-
-	const onEnter = () => {
-		if ($viewport.width < 600) $fixed = false;
-	};
-	const onExit = () => {
-		if ($viewport.width < 600) $fixed = true;
-	};
 </script>
 
 <article>
 	<section id="title">
-		<h1>{copy.hed}</h1>
-		<h3>{copy.dek}</h3>
-		<p>{copy.byline}</p>
-		<!-- <p>{copy.byline2}</p> -->
+		<h1>{@html copy.hed} <span>(insert header illustration here)</span></h1>
+		<p>{@html copy.byline}</p>
+		<p>{@html copy.byline2}</p>
+		<p>{@html copy.byline3}</p>
 	</section>
 
-	<section id="intro" use:inView on:enter={onEnter} on:exit={onExit}>
+	<section id="intro">
 		{#each copy.intro as { value }}
 			<p>{@html value}</p>
 		{/each}
 	</section>
 
-	<section id="scene-1">
-		<Scene steps={copy.scenes[0].steps} />
+	<section id="scenes">
+		{#each [1, 2, 3] as i}
+			<Scene />
+		{/each}
 	</section>
 </article>
 
 <style>
 	article {
-		max-width: 800px;
+		max-width: 600px;
 		margin: auto;
 		font-family: var(--sans);
 	}
-	#title {
-		padding: 0 1rem;
+	section {
+		margin: 3rem 0;
+	}
+	section:first-child {
+		margin-top: 0;
 	}
 	#intro {
-		margin: 0;
-		padding: 3rem 1rem;
+		font-size: 1.25rem;
+	}
+	#title p {
+		text-align: center;
+	}
+	#title p:nth-of-type(1) {
+		font-size: 1.5rem;
+	}
+	#title p:nth-of-type(2) {
+		font-size: 1.25rem;
+	}
+	#title p:nth-of-type(3) {
+		font-size: 1rem;
+	}
+	h1 {
+		width: 100%;
+		border: 1px dashed var(--color-fg);
+		padding: 4rem;
+	}
+	h1 span {
+		font-size: 1rem;
 	}
 </style>
